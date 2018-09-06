@@ -1,0 +1,24 @@
+clear;
+clc;
+[I,J]=CVimage();
+M=2;
+T=0.5;
+A=6;
+edgedata=CVedge(I,M,T,A);
+figure(1);
+imshow(edgedata);
+nT=25;
+nS=25;
+[H,m,b]=CVhough(edgedata);
+
+%-------
+figure(2);
+IJ  = rgb2gray(J);
+
+% Extract edges.
+BW = edge(IJ,'canny');
+thetha_plot(IJ,BW,J);
+%----------
+[SL,TL,intSL,intTL]=CVunhough(H,m,b);
+X=1:50;
+[XL,YL]=CVline(SL,TL,X);
